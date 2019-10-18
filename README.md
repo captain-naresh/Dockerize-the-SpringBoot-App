@@ -13,15 +13,15 @@ dummyinvokedapi api url - http://localhost:9099/echo-echo/
 
 There are two api url - 
 /hello  - Will give you greet message
-/echo-echo/ - Will call the child api via REST Template and reponse comes all the way from child api to parent api.
+/echo-echo/ - Will call the child api via REST Template and reponse comes all the way back from child api to parent api.
 
 
-trick comes here - where will you configure the child api invokcation url in parent api ?
+trick comes here - where will you configure the child api invocation url in parent api ?
   create one application.properties file in parent api and configure below details to configure the uri of child api.
   
         operations.restURL=http://localhost:9099/echo-echo/
         
-  The child api is running on localhost but with 9099 port, and this url you get when you run your child api on tomcat server locally with   the mvn spring-boot:run cmd.
+  The child api is running on localhost but with 9099 port, and the above url you get when you run your child api on tomcat server locally with the mvn spring-boot:run cmd.
   
   
 Steps for creating the app and dockerize it in local machine -
@@ -41,7 +41,7 @@ Steps for creating the app and dockerize it in local machine -
     "salary": 30.44
     }
 
-3. Now install the docker for windows and check whether it is availabel locally or not.
+3. Now install the docker for windows and check whether it is available locally or not.
     open command prompt, type docker and hit the enter, so you will find the all the docker arguments, its means docker is running in       your local machine.
     
  4. Once you have Docker in local, you can create docker file for both the api individually. docker file structure -
@@ -65,7 +65,7 @@ Steps for creating the app and dockerize it in local machine -
         ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/businessapi.jar"]
         
         
-5. As describe above, you will need the jar file of your api , suppose businessapi.jar, so you have to create jar for both api via below    commnad - 
+5. As describe above, you will need the jar file of your api , suppose businessapi.jar, so you have to create jar first for both api via    below commnad - 
 
     mvn package
     
@@ -73,9 +73,9 @@ Steps for creating the app and dockerize it in local machine -
 
       docker build -t <name of image> <tag-name>
   
-7. After build the docker file you will get the docker image, so you hit just docker images, ans you will be find all available images on you rlocal repository.
+7. After build the docker file you will get the docker image, so you hit just docker images, ans you will be find all available images on you local repository.
 
-8 . Now run the docker image or shoul i say run you api in dockerize container - 
+8 . Now run the docker image or should i say run you api in dockerize container - 
 
       docker run -p <port> <name of docker image>
       
@@ -83,7 +83,7 @@ Steps for creating the app and dockerize it in local machine -
  
         docker run -p 8090:8080 <name of docker image>
         
-  So , when you access you api , it will be OS port iike 8090.
+  So , when you access you parent api , it will be OS port iike 8090.
  
  
  9.  Test the api after dockezire it - 
